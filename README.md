@@ -9,6 +9,11 @@ techniques. The dataset used in the project contains several features related to
 data, including the price, volume, and percentage change for each day. The analysis is aimed at
 understanding the patterns and trends in Bitcoin prices over time.
 
+Cryptocurrencies like Bitcoin have demonstrated high volatility and complex price behavior, making them challenging yet valuable targets for time series forecasting. This project focuses on predicting Bitcoin's closing price using historical data and time series modeling techniques. 
+The dataset includes key financial indicators such as daily opening and closing prices, trading volume, highest and lowest prices, and percentage change. By applying ARIMA modeling, the project explores underlying patterns, seasonality, and dependencies in Bitcoin's historical performance to generate forecasts. 
+
+In future phases, we aim to expand the model by incorporating external market indicators such as Ethereum prices and Dow Jones indices. This will enable us to build hybrid models (e.g., ARIMA + LSTM) to improve prediction accuracy and provide more robust market insights.
+
 ## Dataset
 Source: [Bitcoin Historical Data CSV](https://www.investing.com/crypto/bitcoin/historical-data)
 The dataset used for this project contains the following columns:
