@@ -46,23 +46,6 @@ predict future prices.
 
 ## Methodology
 
-### Data cleaning and preprocessing
-
-Data cleaning and preprocessing are critical steps in any data science project, as they ensure the quality
-and usability of the dataset. In this project, the following preprocessing tasks were performed:
-
-Handling Non-Numeric Characters: The dataset contains columns like Price, Vol., and Change % that may
-include non-numeric characters such as currency symbols ($), commas (,), and shorthand notation like &#39;K&#39;,
-&#39;M&#39;, and &#39;B&#39; for thousands, millions, and billions, respectively. These need to be cleaned so that the data can
-be used for further analysis and modeling.
-
-Converting to Numeric Values: Once the non-numeric characters are removed, the columns are converted
-to numeric data types. This is done to ensure that the values are interpretable by mathematical models like
-ARIMA.
-
-Handling Missing Values: After the conversion to numeric types, it&#39;s possible that some rows have missing
-values (NaN) due to conversion issues or initial data gaps. These missing values are removed using the
-dropna() function.
 
 ### Data Cleaning and Preprocessing
 
