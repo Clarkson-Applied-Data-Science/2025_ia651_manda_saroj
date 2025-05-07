@@ -85,17 +85,69 @@ Correlation Analysis: A correlation matrix helps identify relationships between 
 For instance, it is useful to see if there&#39;s a correlation between Volume and Price, which could provide
 insights into market behavior.
 
+### Exploratory Data Analysis
+
+Exploratory Data Analysis (EDA) was conducted to understand the distribution, patterns, and relationships in the dataset. The key steps and insights include:
+
+#### 1. Summary Statistics
+We calculated measures such as **mean**, **median**, **standard deviation**, and **range** for all numeric columns. This helped us understand central tendencies and variation across price, volume, and daily change percentages.
+
+#### 2. Distribution and Outliers (Box Plots)
+Box plots were created for `Price`, `Volume`, and `Change %` to visualize the distribution and identify outliers.
+
+- **Price:** The price distribution is right-skewed with several extreme values above $80,000.
+  
+![Box Plot - Price](https://github.com/user-attachments/assets/c2f88e2d-f5e6-4b41-9f26-7f285e808df4)
+
+
+
+
+
+- **Volume:** Trading volume showed a heavy concentration near zero with many large outliers, suggesting occasional spikes in trading activity.
+
+  ![Box Plot - Volume](https://github.com/user-attachments/assets/34bd307e-fc40-4645-9faa-15796d52c7bd)
+
+
+- **Change %:** The daily percentage change is centered around 0 but includes significant outliers on both ends, highlighting volatility in the market.
+
+<img src="https://github.com/user-attachments/assets/0224b040-c80c-4e7c-a68c-62c6a8c2194f" width="300"/>
+
+
+#### 3. Relationship Between Price and Volume
+
+We explored how trading volume relates to Bitcoin price using a scatter plot. The plot reveals that while most trading occurs at lower volumes, some mid-to-high price levels correspond to higher trading activity.
+
+
+  <img src="https://github.com/user-attachments/assets/69d04b88-02b1-41ca-ac97-4c312d13affa" alt="Scatter Plot - Price vs Volume" width="700"/>
+</p>
+
+
+
+
+#### 4. Stationarity and Trend Inspection
+We used time series plots (not shown here) to visually assess stationarity and trends. This step informed the need for differencing in ARIMA modeling.
+
+> These visualizations gave us a deeper understanding of the dataset's dynamics, helped detect anomalies, and guided preprocessing decisions.
+
 ### Time series modeling using ARIMA
 
 #### Train-Test Split
 
-In time series forecasting, we split the data chronologically. We use the first part of the data as the training
-set and the remaining part as the test set. This ensures that the future (test data) is never seen during the
-model training process, mimicking real-world prediction scenarios.
+In time series forecasting, it is essential to preserve the chronological order of the data during model evaluation. Instead of a random split, we divide the data such that the model learns only from the past and is tested on the future — effectively simulating real-world forecasting scenarios.
 
-The dataset is split into a training set (80%) and a testing set (20%) to evaluate the model&#39;s performance.
-This is crucial in time series forecasting, as we need to train the model on past data and test its ability to
-predict future values.
+In this project, we split the dataset chronologically:
+
+Training Set: Covers 80% of the earlier portion of the dataset (January 13, 2016 – December 31, 2022)
+
+Testing Set: Covers the remaining 20% (January 13, 2023 – April 19, 2025)
+
+This method ensures that the future (test data) is never exposed during training, allowing us to properly evaluate how well the model generalizes and predicts unseen data.
+
+![image](https://github.com/user-attachments/assets/c17efc51-a373-4cbb-8f4e-9322c20b7661)
+>The visual representation above highlights the training and testing periods, helping us better understand the model's performance on future Bitcoin prices.
+
+
+
 
 #### Fitting Model
 
