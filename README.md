@@ -64,6 +64,28 @@ Handling Missing Values: After the conversion to numeric types, it&#39;s possibl
 values (NaN) due to conversion issues or initial data gaps. These missing values are removed using the
 dropna() function.
 
+### Data Cleaning and Preprocessing
+
+To ensure the dataset was ready for modeling, several cleaning steps were implemented:
+
+1. **Date Parsing**  
+   The 'Date' column was converted to datetime format using `pd.to_datetime()`, with coercion enabled to handle any formatting inconsistencies.
+
+2. **Removing Non-Numeric Characters**  
+   Columns like 'Price', 'Vol.', and 'Change %' contained symbols and shorthand notations such as `$`, `,`, `%`, `K` (thousands), `M` (millions), and `B` (billions). These were stripped or converted using regex-based replacement to standard numeric formats (e.g., `'K' → e3`, `'M' → e6`).
+
+3. **Numeric Conversion**  
+   After cleaning, all target columns were converted to numeric types using `pd.to_numeric()`. This step ensured compatibility with statistical models like ARIMA, which require numerical inputs.
+
+4. **Missing Value Handling**  
+   The dataset was checked for `NaN` values introduced during coercion or conversion. Missing rows were removed using `.dropna()` to ensure model training integrity.
+
+5. **Validation**  
+   After preprocessing, we verified the data structure and confirmed that the key columns were free from formatting issues or missing data. A `df.isnull().sum()` check showed that all key numeric fields were fully cleaned.
+
+> Overall, this preprocessing step was essential to ensure the dataset was reliable, consistent, and suitable for time series forecasting models.
+
+
 ### Exploratory data analysis.
 
 Exploratory Data Analysis (EDA) is an essential step to understand the underlying structure, patterns, and
