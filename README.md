@@ -110,7 +110,7 @@ Box plots were created for `Price`, `Volume`, and `Change %` to visualize the di
 
 - **Change %:** The daily percentage change is centered around 0 but includes significant outliers on both ends, highlighting volatility in the market.
 
-<img src="https://github.com/user-attachments/assets/0224b040-c80c-4e7c-a68c-62c6a8c2194f" width="300"/>
+<img src="https://github.com/user-attachments/assets/0224b040-c80c-4e7c-a68c-62c6a8c2194f" width="700"/>
 
 
 #### 3. Relationship Between Price and Volume
@@ -149,81 +149,178 @@ This method ensures that the future (test data) is never exposed during training
 
 
 
-#### Fitting Model
+### Model Fitting and Outcome
 
-The core objective of this project is to build a forecasting model to predict Bitcoin prices based on historical
-data. For this task, the ARIMA (AutoRegressive Integrated Moving Average) model is used. ARIMA is a
-widely used statistical method for time series forecasting, which is well-suited for predicting Bitcoin prices
-due to its ability to capture temporal dependencies.
+Initially, we used the ARIMA (AutoRegressive Integrated Moving Average) model to capture temporal
+dependencies. To enhance model performance, we introduced lag features (lag1 and lag2). Additionally, we
+applied the AutoARIMA model to automatically select the best hyperparameters and improve prediction
+accuracy.
 
-ARIMA Model: ARIMA uses three main components:Model order: (p=5, d=1, q=0)
+### ARIMA Model with Basic Configuration:
+The ARIMA model is a statistical method used for time series forecasting. It consists of three main
+components:
 
-AR (AutoRegressive): A regression model that uses the dependency between an observation and a number
-of lagged observations.
+AR (AutoRegressive): Models the dependency between an observation and its lagged values.
 
-I (Integrated): Differencing the series to make it stationary (i.e., to eliminate trends and seasonality).
+I (Integrated): Makes the series stationary by removing trends and seasonality.
 
-MA (Moving Average): Models the dependency between an observation and a residual error from a moving
-average model applied to lagged observations.
+MA (Moving Average): Models the relationship between an observation and the residual error from the
+moving average model.
 
-In time series forecasting, a train-test split is necessary to evaluate how well the model generalizes to
-unseen data. Here’s the typical flow for ARIMA model evaluation:
+Initially, we applied the basic ARIMA model to the Bitcoin price data. However, the performance could be
+improved by capturing more temporal dependencies.
 
-### Forecasting future Bitcoin prices
+#### Output with Basic ARIMA Model:
+![image](https://github.com/user-attachments/assets/4e81ee58-3183-40a5-b839-939a951ca6c0)
+>The basic ARIMA model was able to capture the general trend in Bitcoin price fluctuations but lacked
+accuracy in predicting short-term price changes.
+&gt;RMSE: 55045.37
+&gt;MAE: 50475.75
 
-Forecasting and Plotting: Finally, the predictions made by the model on the test set can be compared to the
-actual values. We can visualize the results by plotting both the actual prices and the forecasted prices.
+### Introducing Lag Features for ARIMA:
+To improve the ARIMA model, we introduced lag features (lag1 and lag2). These features represent the
+Bitcoin prices from previous days:
 
-### Evaluating model performance using RMSE
+Lag1: The Bitcoin price from the previous day.
 
-Evaluation: After training the model on the training data, we evaluate the model on the test data using
-performance metrics such as Mean Squared Error (MSE) or Mean Absolute Error (MAE). These metrics help
-us assess how well the model performs on unseen data.
-Mean Squared Error (MSE): It helps us understand how close the predicted values are to the actual values
-in the test set. A lower MSE means better performance.
+Lag2: The Bitcoin price from two days ago.
 
-#### Actual Vs Prediction for bitcoin based on our model (auto ARIMA)
-![image](https://github.com/user-attachments/assets/86a02ccd-7c81-4437-99fc-114ba490852d)
+Lag features help capture price momentum and dependencies between the current and past observations.
+Including these features allows the model to better understand the time-series patterns and improve its
+predictive accuracy.
 
-After fitting the model, we print the summary of the ARIMA model. This summary provides valuable
-information such as:
+#### Output with Lag Features for ARIMA:
 
-The estimated parameters for the AR (AutoRegressive), MA (Moving Average), and I (Integrated)
-components.
+By including lag1 and lag2 features, the ARIMA model became more sensitive to recent changes in Bitcoin
+prices, improving the model’s predictive accuracy.
 
-The statistical significance of the model parameters.
+AutoARIMA for Hyperparameter Optimization:
+After adding lag features, we further enhanced the model by running AutoARIMA. AutoARIMA is an
+automated method that selects the best ARIMA model by optimizing the hyperparameters (p, d, q). It
+analyzes the data and automatically identifies the optimal configuration for the model, ensuring better
+performance and more accurate forecasts.
 
-Performance metrics such as AIC (Akaike Information Criterion), which helps evaluate the goodness of the
+Prediction on Testing Data with AutoARIMA:
+
+![image](https://github.com/user-attachments/assets/03e61dc8-c640-437c-a3d8-2470613f85e8)
+>After training with AutoARIMA, the model performed significantly better on the testing dataset. The
+predictions were more accurate, reflecting a deeper understanding of Bitcoin’s price patterns.
+
+### Improved Future Price Prediction:
+By incorporating lag features and running AutoARIMA, the model’s ability to predict future Bitcoin prices
+improved considerably. The combination of temporal features and hyperparameter optimization allowed
+the model to capture the long-term and short-term trends more effectively, producing better future price
+predictions.
+
+#### Prediction of Future Price with Lag Features and AutoARIMA:
+
+![image](https://github.com/user-attachments/assets/3f1b70ed-216d-4379-b456-abe70bba98ca)
+>The forecasted future Bitcoin prices showed an improvement in accuracy compared to earlier predictions,
+especially in capturing sudden price fluctuations.
+
+### LSTM Model:
+We also explored the Long Short-Term Memory (LSTM) model as an alternative to ARIMA. LSTM is a type of
+Recurrent Neural Network (RNN) that excels in learning long-term dependencies in time series data.
+
+####  Challenges with LSTM:
+
+Data Requirements: LSTM models require a large amount of training data. For better predictions, it&#39;s
+essential to incorporate additional correlated variables, such as Ethereum price and the Dow Jones index,
+alongside Bitcoin prices. However, in our case, the available data was limited, leading to underfitting of the
 model.
 
-![image](https://github.com/user-attachments/assets/bcce2098-f5b0-4f54-93b8-001d7229730a)
+Performance: Despite using the correlated variables, the LSTM model did not perform well, as the data was
+insufficient for training the model effectively. As a result, the LSTM model did not deliver better predictions
+compared to ARIMA.
 
-### Residual Analysis and Model Diagnostics
-After fitting the ARIMA model to predict Bitcoin prices, residual analysis is performed to evaluate the
-model&#39;s performance. This analysis includes two key plots: the residual plot and the histogram of residuals.
+# Conclusion:
 
-![image](https://github.com/user-attachments/assets/2653b80b-d393-4028-b2af-817eee398f30)
+ARIMA Model: The ARIMA model provided good performance in forecasting Bitcoin prices based on
+historical data. It is well-suited for time series forecasting tasks with stationary data.
 
-#### Residual Plot
-Purpose: Shows the residuals (errors) over time to check if the model captures all patterns in the data.
+LSTM Model: Although LSTM is a powerful deep learning model for time series forecasting, the lack of
+sufficient data and the need for additional correlated variables hindered its performance in this case.
 
-Interpretation: The residuals fluctuate around zero but show visible patterns (spikes around 2021),
-indicating that the ARIMA model has not fully captured all trends and dependencies in the data.
+##### Prediction of amount:
+| **Date** | **Predicted Price** |
+| ---------- | ------------------- |
+| 2025-04-20 | 84,047.41 |
+| 2025-04-21 | 84,508.75 |
+| 2025-04-22 | 84,037.07 |
+| 2025-04-23 | 81,054.96 |
+| 2025-04-24 | 83,806.03 |
+| 2025-04-25 | 84,068.92 |
+| 2025-04-26 | 82,461.66 |
+| 2025-04-27 | 83,769.38 |
+| 2025-04-28 | 82,728.55 |
+| 2025-04-29 | 86,521.28 |
+| 2025-04-30 | 84,012.90 |
+| 2025-05-01 | 83,873.82 |
+| 2025-05-02 | 83,758.17 |
+| 2025-05-03 | 85,950.54 |
+| 2025-05-04 | 87,288.85 |
+| 2025-05-05 | 87,183.91 |
+| 2025-05-06 | 86,731.29 |
+| 2025-05-07 | 86,898.78 |
+| 2025-05-08 | 84,137.76 |
+| 2025-05-09 | 82,447.85 |
+| 2025-05-10 | 82,195.74 |
+| 2025-05-11 | 82,420.09 |
+| 2025-05-12 | 83,586.97 |
 
-Next Steps: Further model tuning or trying a Seasonal ARIMA (SARIMA) model to capture seasonal patterns
-or exploring other models like LSTM could improve the forecasts.
+| 2025-05-13 | 84,352.28 |
+| 2025-05-14 | 83,477.76 |
+| 2025-05-15 | 83,886.65 |
+| 2025-05-16 | 84,727.36 |
+| 2025-05-17 | 84,313.11 |
+| 2025-05-18 | 84,882.34 |
+| 2025-05-19 | 85,097.76 |
 
-#### Histogram of Residuals
-Purpose: Displays the distribution of residuals to check if they follow a normal distribution (an assumption
-of the model).
+### Model Evaluation
+Evaluation Metrics:
+The ARIMA model&#39;s performance was assessed using two key metrics:
 
-Interpretation: The residuals are skewed to the right, showing non-normality, which suggests that the
-model may need further refinement.
+Mean Absolute Error (MAE):
+Value: 1065.28
 
-Next Steps: Refining the model, possibly incorporating exogenous variables, or experimenting with LSTM
-for non-linear trends might help improve the predictions.
+Interpretation: The MAE represents the average absolute difference between the predicted and actual
+Bitcoin prices. In this case, the model&#39;s predictions are, on average, off by approximately $1,065. Given
+Bitcoin&#39;s volatility, this can be considered a reasonable error, but improvements can still be made to reduce
+this discrepancy.
 
-Conclusion
-The residual analysis indicates that the ARIMA model may not fully capture Bitcoin price movements.
-Future work will focus on refining the model, experimenting with SARIMA, and exploring LSTM or hybrid
-models for better forecasting.
+Root Mean Squared Error (RMSE):
+Value: 1863.76
+
+Interpretation: RMSE penalizes larger errors more heavily, making it a useful metric when high deviations in
+price are critical to minimize. The model’s RMSE of ~1,864 suggests that, while the model is reasonably
+accurate, there are larger fluctuations in the predicted prices that could be reduced. This is typical for
+Bitcoin, as it experiences sharp price movements, but further model tuning could reduce these large errors.
+
+Performance Summary:
+Good Performance for Long-Term Forecasting: Considering Bitcoin’s highly volatile nature, an MAE of
+~1,065 and RMSE of ~1,864 are acceptable for predicting future prices over long time horizons. However,
+the accuracy could be improved for short-term predictions where precise forecasting is crucial.
+
+Baseline Comparison: For a more meaningful evaluation, comparing this model’s performance against
+simpler baseline methods (e.g., predicting the previous day&#39;s price) can help highlight how much the ARIMA
+model improves on a straightforward approach.
+
+### Future Work to Improve Model Performance
+While the current model performs reasonably well, there are several opportunities for further improving
+the predictions:
+
+1. Incorporating More Features:
+External Factors: Adding more features, such as Ethereum prices, trading volume, market sentiment, or
+other financial indicators, could enhance the model’s predictive power. These variables are often
+correlated with Bitcoin&#39;s price and can help capture additional patterns.
+
+Lag Features: While lag1 and lag2 were introduced, experimenting with additional lags (e.g., lag3, lag4) or
+other derived features (such as moving averages, price volatility, etc.) might improve the model&#39;s accuracy.
+
+2. Expanding the Dataset:
+The model could benefit from a larger dataset, particularly to capture more long-term trends or patterns.
+Additional historical data, including global financial indicators or news events, could further improve
+forecasting.
+
+Data Augmentation techniques or synthetic data generation could also be considered if data availability is
+an issue.
