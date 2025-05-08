@@ -288,7 +288,7 @@ simpler baseline methods (e.g., predicting the previous day&#39;s price) can hel
 model improves on a straightforward approach.
 
 
-### Conclusion
+## Conclusion
 This project successfully explored the use of time series forecasting techniques to predict Bitcoin prices based on historical trading data. Starting with thorough data cleaning, preprocessing, and exploratory data analysis, we built and evaluated multiple forecasting models — with a particular focus on the ARIMA and AutoARIMA methods.
 
 The enhanced ARIMA model, supported by lag features and optimized through AutoARIMA, provided meaningful insights into future Bitcoin price trends. While the Long Short-Term Memory (LSTM) model was also explored, it underperformed due to limited data and insufficient external features.
