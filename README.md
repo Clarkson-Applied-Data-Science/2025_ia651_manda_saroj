@@ -129,9 +129,9 @@ We used time series plots (not shown here) to visually assess stationarity and t
 
 > These visualizations gave us a deeper understanding of the dataset's dynamics, helped detect anomalies, and guided preprocessing decisions.
 
-### Time series modeling using ARIMA
+ Time series modeling using ARIMA
 
-#### Train-Test Split
+### Train-Test Split
 
 In time series forecasting, it is essential to preserve the chronological order of the data during model evaluation. Instead of a random split, we divide the data such that the model learns only from the past and is tested on the future — effectively simulating real-world forecasting scenarios.
 
@@ -156,7 +156,7 @@ dependencies. To enhance model performance, we introduced lag features (lag1 and
 applied the AutoARIMA model to automatically select the best hyperparameters and improve prediction
 accuracy.
 
-### ARIMA Model with Basic Configuration:
+#### ARIMA Model with Basic Configuration:
 The ARIMA model is a statistical method used for time series forecasting. It consists of three main
 components:
 
@@ -177,7 +177,7 @@ accuracy in predicting short-term price changes.
 &gt;RMSE: 55045.37
 &gt;MAE: 50475.75
 
-### Introducing Lag Features for ARIMA:
+#### Introducing Lag Features for ARIMA:
 To improve the ARIMA model, we introduced lag features (lag1 and lag2). These features represent the
 Bitcoin prices from previous days:
 
