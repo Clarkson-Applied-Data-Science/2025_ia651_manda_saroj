@@ -293,7 +293,6 @@ This project successfully explored the use of time series forecasting techniques
 
 The enhanced ARIMA model, supported by lag features and optimized through AutoARIMA, provided meaningful insights into future Bitcoin price trends. While the Long Short-Term Memory (LSTM) model was also explored, it underperformed due to limited data and insufficient external features.
 
-#### Key Takeaways:
 ARIMA with lag features performed better than basic ARIMA and LSTM models.
 
 The model achieved an MAE of 1065.28 and RMSE of 1863.76, which is reasonable given the high volatility of Bitcoin.
