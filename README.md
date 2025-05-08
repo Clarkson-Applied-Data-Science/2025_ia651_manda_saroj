@@ -69,22 +69,6 @@ To ensure the dataset was ready for modeling, several cleaning steps were implem
 > Overall, this preprocessing step was essential to ensure the dataset was reliable, consistent, and suitable for time series forecasting models.
 
 
-### Exploratory data analysis.
-
-Exploratory Data Analysis (EDA) is an essential step to understand the underlying structure, patterns, and
-relationships in the dataset. It involves both statistical and graphical analysis of the data to uncover
-insights. The EDA process in this project includes:
-
-Summary Statistics: Descriptive statistics (like mean, median, min, max, etc.) are calculated to get an initial
-understanding of the data.
-
-Distribution of Features: Visualizing the distribution of key variables (like Price, Vol., and Change %) is
-helpful to understand their spread and identify potential outliers.
-
-Correlation Analysis: A correlation matrix helps identify relationships between different numerical features.
-For instance, it is useful to see if there&#39;s a correlation between Volume and Price, which could provide
-insights into market behavior.
-
 ### Exploratory Data Analysis
 
 Exploratory Data Analysis (EDA) was conducted to understand the distribution, patterns, and relationships in the dataset. The key steps and insights include:
