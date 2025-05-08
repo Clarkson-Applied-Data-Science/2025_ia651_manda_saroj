@@ -111,9 +111,8 @@ We explored how trading volume relates to Bitcoin price using a scatter plot. Th
 #### 4. Stationarity and Trend Inspection
 We used time series plots (not shown here) to visually assess stationarity and trends. This step informed the need for differencing in ARIMA modeling.
 
-> These visualizations gave us a deeper understanding of the dataset's dynamics, helped detect anomalies, and guided preprocessing decisions.
+These visualizations gave us a deeper understanding of the dataset's dynamics, helped detect anomalies, and guided preprocessing decisions.
 
- Time series modeling using ARIMA
 
 ### Train-Test Split
 
@@ -190,7 +189,7 @@ Prediction on Testing Data with AutoARIMA:
 >After training with AutoARIMA, the model performed significantly better on the testing dataset. The
 predictions were more accurate, reflecting a deeper understanding of Bitcoin’s price patterns.
 
-### Improved Future Price Prediction:
+#### Improved Future Price Prediction:
 By incorporating lag features and running AutoARIMA, the model’s ability to predict future Bitcoin prices
 improved considerably. The combination of temporal features and hyperparameter optimization allowed
 the model to capture the long-term and short-term trends more effectively, producing better future price
@@ -202,7 +201,7 @@ predictions.
 >The forecasted future Bitcoin prices showed an improvement in accuracy compared to earlier predictions,
 especially in capturing sudden price fluctuations.
 
-### LSTM Model:
+#### LSTM Model:
 We also explored the Long Short-Term Memory (LSTM) model as an alternative to ARIMA. LSTM is a type of
 Recurrent Neural Network (RNN) that excels in learning long-term dependencies in time series data.
 
@@ -217,7 +216,6 @@ Performance: Despite using the correlated variables, the LSTM model did not perf
 insufficient for training the model effectively. As a result, the LSTM model did not deliver better predictions
 compared to ARIMA.
 
-# Conclusion:
 
 ARIMA Model: The ARIMA model provided good performance in forecasting Bitcoin prices based on
 historical data. It is well-suited for time series forecasting tasks with stationary data.
@@ -225,7 +223,7 @@ historical data. It is well-suited for time series forecasting tasks with statio
 LSTM Model: Although LSTM is a powerful deep learning model for time series forecasting, the lack of
 sufficient data and the need for additional correlated variables hindered its performance in this case.
 
-##### Prediction of amount:
+#### Prediction of amount:
 | **Date** | **Predicted Price** |
 | ---------- | ------------------- |
 | 2025-04-20 | 84,047.41 |
@@ -288,6 +286,24 @@ the accuracy could be improved for short-term predictions where precise forecast
 Baseline Comparison: For a more meaningful evaluation, comparing this model’s performance against
 simpler baseline methods (e.g., predicting the previous day&#39;s price) can help highlight how much the ARIMA
 model improves on a straightforward approach.
+
+
+### Conclusion
+This project successfully explored the use of time series forecasting techniques to predict Bitcoin prices based on historical trading data. Starting with thorough data cleaning, preprocessing, and exploratory data analysis, we built and evaluated multiple forecasting models — with a particular focus on the ARIMA and AutoARIMA methods.
+
+The enhanced ARIMA model, supported by lag features and optimized through AutoARIMA, provided meaningful insights into future Bitcoin price trends. While the Long Short-Term Memory (LSTM) model was also explored, it underperformed due to limited data and insufficient external features.
+
+#### Key Takeaways:
+ARIMA with lag features performed better than basic ARIMA and LSTM models.
+
+The model achieved an MAE of 1065.28 and RMSE of 1863.76, which is reasonable given the high volatility of Bitcoin.
+
+Forecasted values over multiple future dates showed the model's capacity to capture both trend and short-term fluctuations.
+
+Box plots, correlation plots, and trend analysis revealed important patterns and outliers in the dataset.
+
+The train-test split approach ensured real-world-like forecasting evaluation
+
 
 ### Future Work to Improve Model Performance
 While the current model performs reasonably well, there are several opportunities for further improving
